@@ -24,8 +24,6 @@ jobs:
 
       - name: Build image
         run: |
-          apt-get install tree
-          tree
           ls
           cd pager
           docker build . --file Dockerfile -t pager
