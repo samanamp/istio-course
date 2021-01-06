@@ -31,12 +31,12 @@ jobs:
           docker build . --file Dockerfile -t frontend
 
       - name: Log into registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
       - name: Push image
         run: |
-          IMAGE_ID_1=docker.pkg.github.com/${{ github.repository }}/pager
-          IMAGE_ID_2=docker.pkg.github.com/${{ github.repository }}/frontend
+          IMAGE_ID_1=${{ secrets.DOCKERHUB_USERNAME }}/pager
+          IMAGE_ID_2=${{ secrets.DOCKERHUB_USERNAME }}/frontend
 
           # Change all uppercase to lowercase
           IMAGE_ID_1=$(echo $IMAGE_ID_1 | tr '[A-Z]' '[a-z]')
